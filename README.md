@@ -1,56 +1,9 @@
-# BlueSpice "Formula" service
+<img alt="BlueSpice Logo" align="right" src="https://bluespice.com/wp-content/uploads/2022/09/bluespice_logo.png" />
 
-This service hosts a Mathoid server, that can be used with the CLI configuration of Extension:Math.
+# `bluespice/formula` service for BlueSpice
 
-## Using it within BlueSpice or MediaWiki
+This service is the formula component. It provides formula functionality for BlueSpice.
 
-Given you have copied `_client/mathoid-remote` from this repository to `/usr/local/bin/` of your server and you have this service running at `http://localhost:10044/`, you can configure the Math extension like this:
+It is part of the [BlueSpice MediaWiki deployment stack](https://github.com/hallowelt/bluespice-deploy). Instructions on how to use it can be found on the [official helpdesk 📚](https://en.wiki.bluespice.com/wiki/Setup:Installation_Guide/Docker). For questions and support, please use the [contact form 🌐](https://bluespice.com/contact/) or visit the [community forums 💡](https://community.bluespice.com/).
 
-```php
-$GLOBALS['wgMathoidCli'] = [
-	'/usr/local/bin/mathoid-remote',
-	'http://localhost:10044/'
-];
-```
-
-## Testing locally
-
-Run `curl` like this:
-```sh
-curl \
-	-X POST "http://localhost:10044/" \
-	-d "q={\\displaystyle \\overbrace{ 1+2+\\cdots+100 }^{5050}}&type=tex"
-
-curl \
-	-X POST "http://localhost:10044/" \
-	-d "q={\\displaystyle \\ce{CO2 + C -> 2 CO}}&type=chem"
-```
-
-## How to release a new version
-
-### Build a new version of the image
-```sh
-docker build -t bluespice/formula:latest .
-```
-
-### Apply proper tags
-HINT: We align the image tags with the version of BlueSpice that it is compatible with.
-
-Example:
-```sh
-docker tag bluespice/formula:latest bluespice/formula:4
-docker tag bluespice/formula:latest bluespice/formula:4.4
-docker tag bluespice/formula:latest bluespice/formula:4.4.1
-```
-
-### Push the image to the registry
-Example:
-```sh
-docker push bluespice/formula:latest
-docker push bluespice/formula:4
-docker push bluespice/formula:4.4
-docker push bluespice/formula:4.4.1
-```
-
-## Testing
-Install `trivy` and run `trivy image bluespice/formula` to check for vulnerabilities.
+The `main` branch of this repository is intentionally kept empty. Please refer to the specific version branches (e.g., `5.1.x`, `5.2.x`, etc.) for the relevant Dockerfiles and configurations corresponding to each BlueSpice version.
