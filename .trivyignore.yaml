@@ -1,2 +1,4 @@
-  - id: CVE-2025-7783
-    reason: "https://en.wiki.bluespice.com/wiki/Security:Security_Advisories"
+vulnerabilities:
+    - id: CVE-2025-7783
+      statement: "https://en.wiki.bluespice.com/wiki/Security:Security_Advisories"
+
