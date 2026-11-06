@@ -18,6 +18,10 @@ WORKDIR /opt/mathoid
 RUN apk update && apk add --no-cache librsvg
 COPY --from=cleanup /opt/mathoid /opt/mathoid
 COPY ./root-fs/opt/init.sh /opt/init.sh
+
+# Build timestamp (UTC, YmdHis)
+RUN mkdir -p /image && date -u +%Y%m%d%H%M%S > /image/BUILDINFO
+
 EXPOSE 10044
 USER 1001
 ENTRYPOINT [ "/opt/init.sh"]
