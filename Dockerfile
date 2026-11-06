@@ -19,9 +19,9 @@ RUN apk update && apk add --no-cache librsvg
 COPY --from=cleanup /opt/mathoid /opt/mathoid
 COPY ./root-fs/opt/init.sh /opt/init.sh
 
-# Build info: value of build arg BUILDINFO, falls back to the UTC build timestamp (YmdHis)
+# Build info: value of build arg BUILDINFO, `-` if not set
 ARG BUILDINFO
-RUN mkdir -p /image && echo "${BUILDINFO:-$(date -u +%Y%m%d%H%M%S)}" > /image/BUILDINFO
+RUN mkdir -p /image && echo "${BUILDINFO:--}" > /image/BUILDINFO
 
 EXPOSE 10044
 USER 1001
