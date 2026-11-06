@@ -18,6 +18,11 @@ WORKDIR /opt/mathoid
 RUN apk update && apk add --no-cache librsvg
 COPY --from=cleanup /opt/mathoid /opt/mathoid
 COPY ./root-fs/opt/init.sh /opt/init.sh
+
+# Build info: value of build arg BUILDINFO, `-` if not set
+ARG BUILDINFO
+RUN mkdir -p /image && echo "${BUILDINFO:--}" > /image/BUILDINFO
+
 EXPOSE 10044
 USER 1001
 ENTRYPOINT [ "/opt/init.sh"]
